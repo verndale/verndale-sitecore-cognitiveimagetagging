@@ -77,18 +77,31 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Base\ImageTagging.cs" />
+    <Compile Include="Commands\AddAltTextCommand.cs" />
+    <Compile Include="Commands\BulkAddAltTextCommand.cs" />
+    <Compile Include="Commands\ForceAddAltTextCommand.cs" />
+    <Compile Include="Events\AddAltTextSaveEvent.cs" />
+    <Compile Include="Extensions\ItemExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="App.config.example" />
     <None Include="App_Config\Include\Constellation\Constellation.Foundation.PackageVerification.config.example" />
+    <None Include="App_Config\Include\Verndale\Verndale.Feature.CognitiveImageTagging.Commands.config" />
+    <None Include="App_Config\Include\Verndale\Verndale.Feature.CognitiveImageTagging.Events.config" />
+    <None Include="App_Config\Include\Verndale\Verndale.Feature.CognitiveImageTagging.Pipeline.Upload.config" />
     <None Include="packages.config" />
+    <Compile Include="Pipelines\Upload\AddImageAltText.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\packages\PutPackagesHere.txt" />
     <Content Include="Constellation.License.txt" />
     <Content Include="Verndale.License.txt" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
