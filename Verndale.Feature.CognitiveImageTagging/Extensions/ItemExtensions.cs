@@ -1,6 +1,7 @@
-﻿using System.Linq;
-using Sitecore;
-using Sitecore.Data.Items;
+﻿using Sitecore.Data.Items;
+using Sitecore.Data;
+using Sitecore.Diagnostics;
+using Verndale.CognitiveImageTagging;
 
 namespace Verndale.Feature.CognitiveImageTagging.Extensions
 {
@@ -15,13 +16,23 @@ namespace Verndale.Feature.CognitiveImageTagging.Extensions
         {
             if (item == null) return false;
 
-            if (item.TemplateID == TemplateIDs.VersionedImage
-                || item.TemplateID == TemplateIDs.UnversionedImage)
+            var compatibleTemplatesString = Sitecore.Configuration.Settings.GetSetting("CompatibleImageTemplateIds");
+
+            if (string.IsNullOrWhiteSpace(compatibleTemplatesString))
             {
-                return true;
+                Log.Error("Verndale.CognitiveImageTagging: Unable to load the compatible image template list from Settings.", typeof(ServiceManager));
+                return false;
             }
 
-            return item.Template.BaseTemplates.Any(baseTemplate => IsImage(baseTemplate));
+            var compatibleTemplatesArray = compatibleTemplatesString.Split('|');
+
+            foreach (var templateId in compatibleTemplatesArray)
+            {
+                if (item.TemplateID == new ID(templateId))
+                    return true;
+            }
+
+            return false;
         }
     }
 }

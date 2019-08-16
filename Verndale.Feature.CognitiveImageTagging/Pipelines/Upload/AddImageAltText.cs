@@ -5,6 +5,7 @@ using Sitecore.SecurityModel;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Sitecore.Shell.Framework.Commands;
 using Verndale.CognitiveImageTagging;
 using Verndale.CognitiveImageTagging.Services;
 using Verndale.Feature.CognitiveImageTagging.Extensions;
@@ -36,18 +37,18 @@ namespace Verndale.Feature.CognitiveImageTagging.Pipelines.Upload
 
                 var imageStream = mediaItem.GetMediaStream();
 
-                using (new SecurityDisabler())
+                using (new EditContext(mediaItem))
                 {
                     mediaItem.Alt = GetAltText(imageStream, service).Result;
+                }
 
-                    if (string.IsNullOrEmpty(mediaItem.Alt))
-                    {
-                        Log.Warn($"Verndale.CognitiveImageTagging: Unable to provide alt text for media item, {mediaItem.ID}", this);
-                    }
-                    else
-                    {
-                        Log.Debug($"Verndale.CognitiveImageTagging: Added alt text of '{mediaItem.Alt}' to media item, {mediaItem.ID}", this);
-                    }
+                if (string.IsNullOrEmpty(mediaItem.Alt))
+                {
+                    Log.Warn($"Verndale.CognitiveImageTagging: Unable to provide alt text for media item, {mediaItem.ID}", this);
+                }
+                else
+                {
+                    Log.Debug($"Verndale.CognitiveImageTagging: Added alt text of '{mediaItem.Alt}' to media item, {mediaItem.ID}", this);
                 }
             }
 
@@ -60,8 +61,8 @@ namespace Verndale.Feature.CognitiveImageTagging.Pipelines.Upload
 
             var captionsList = result?.Captions.ToList();
 
-			return (captionsList == null || !captionsList.Any()) 
-                ? string.Empty 
+            return (captionsList == null || !captionsList.Any())
+                ? string.Empty
                 : captionsList.First();
         }
     }

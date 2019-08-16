@@ -1,8 +1,6 @@
 ﻿using System;
-using Sitecore;
 using Sitecore.Data.Items;
 using Sitecore.Events;
-using Verndale.Feature.CognitiveImageTagging.Base;
 using Verndale.Feature.CognitiveImageTagging.Extensions;
 
 namespace Verndale.Feature.CognitiveImageTagging.Events
@@ -13,7 +11,7 @@ namespace Verndale.Feature.CognitiveImageTagging.Events
     /// </summary>
     public class AddAltTextSaveEvent
     {
-        public void OnItemSaving(object sender, EventArgs args)
+        public void OnItemSaved(object sender, EventArgs args)
         {
             var item = Event.ExtractParameter(args, 0) as Item;
 
@@ -24,7 +22,7 @@ namespace Verndale.Feature.CognitiveImageTagging.Events
 
             if (string.IsNullOrWhiteSpace(mediaItem?.Alt))
             {
-                ImageTagging.AddAltText(mediaItem);
+                ImageTagging.AddAltText(mediaItem, true);
             }
         }
     }

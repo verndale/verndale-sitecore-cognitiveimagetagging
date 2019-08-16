@@ -2,7 +2,6 @@
 using Sitecore.Diagnostics;
 using Sitecore.Shell.Framework.Commands;
 using System.Linq;
-using Verndale.Feature.CognitiveImageTagging.Base;
 using Verndale.Feature.CognitiveImageTagging.Extensions;
 
 namespace Verndale.Feature.CognitiveImageTagging.Commands
@@ -25,7 +24,8 @@ namespace Verndale.Feature.CognitiveImageTagging.Commands
 
             MediaItem mediaItem = contextItem;
 
-            ImageTagging.AddAltText(mediaItem,true);
+            ImageTagging.AddAltText(mediaItem, true);
+            
         }
     }
 }

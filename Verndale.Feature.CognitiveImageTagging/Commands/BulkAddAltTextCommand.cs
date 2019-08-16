@@ -2,7 +2,6 @@
 using Sitecore.Data.Items;
 using Sitecore.Diagnostics;
 using Sitecore.Shell.Framework.Commands;
-using Verndale.Feature.CognitiveImageTagging.Base;
 using Verndale.Feature.CognitiveImageTagging.Extensions;
 
 namespace Verndale.Feature.CognitiveImageTagging.Commands
@@ -34,7 +33,7 @@ namespace Verndale.Feature.CognitiveImageTagging.Commands
             {
                 MediaItem mediaItem = item;
 
-                ImageTagging.AddAltText(mediaItem, true);
+                ImageTagging.AddAltText(mediaItem);
             }
 
             if (!item.HasChildren) return;

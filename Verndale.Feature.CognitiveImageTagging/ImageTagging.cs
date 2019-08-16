@@ -1,18 +1,19 @@
 ﻿using Sitecore.Data.Items;
-using System.Linq;
 using Sitecore.Diagnostics;
+using System.Linq;
 using Verndale.CognitiveImageTagging;
 
-namespace Verndale.Feature.CognitiveImageTagging.Base
+namespace Verndale.Feature.CognitiveImageTagging
 {
     public static class ImageTagging
     {
         /// <summary>
-        /// 
+        /// Call CognitiveImageTagging Service Manager / Analysis Service;
+        /// Call GetImageDescription to call the analysis service to retrieve the possible captions for the given media item.
         /// </summary>
-        /// <param name="mediaItem"></param>
-        /// <param name="retainExistingText"></param>
-        public static async void AddAltText(MediaItem mediaItem, bool retainExistingText = false)
+        /// <param name="mediaItem">MediaItem to be analyzed</param>
+        /// <param name="retainExistingText">If Alt text is populated, method won't overwrite alt text if true.  Default: false</param>
+        public static void AddAltText(MediaItem mediaItem, bool retainExistingText = false)
         {
             if (mediaItem == null)
             {
@@ -26,7 +27,13 @@ namespace Verndale.Feature.CognitiveImageTagging.Base
 
             var service = ServiceManager.GetAnalysisService();
 
-            ImageResult result = await service.GetImageDescription(imageStream, "en", true);
+            ImageResult result = service.GetImageDescription(imageStream, "en", true).Result;
+
+            if (result?.Exception != null && !string.IsNullOrWhiteSpace(result.Exception.Message))
+            {
+                Log.Error($"Verndale.CognitiveImageTagging: Unable to tag media item, {mediaItem.ID}; caption is null.", typeof(ServiceManager));
+                return;
+            }
 
             var captionsList = result?.Captions.ToList();
 
@@ -36,7 +43,10 @@ namespace Verndale.Feature.CognitiveImageTagging.Base
                 return;
             }
 
-            mediaItem.Alt = captionsList.First();
+            using (new EditContext(mediaItem))
+            {
+                mediaItem.Alt = captionsList.First();
+            }
 
             Log.Debug($"Verndale.CognitiveImageTagging: Added alt text of '{captionsList.First()}' to media item, {mediaItem.ID}", typeof(ServiceManager));
         }

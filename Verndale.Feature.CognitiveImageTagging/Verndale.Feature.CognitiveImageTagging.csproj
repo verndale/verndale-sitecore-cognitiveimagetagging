@@ -77,7 +77,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Base\ImageTagging.cs" />
+    <Compile Include="ImageTagging.cs" />
     <Compile Include="Commands\AddAltTextCommand.cs" />
     <Compile Include="Commands\BulkAddAltTextCommand.cs" />
     <Compile Include="Commands\ForceAddAltTextCommand.cs" />
@@ -93,7 +93,10 @@
     <None Include="App_Config\Include\Constellation\Constellation.Foundation.PackageVerification.config.example" />
     <None Include="App_Config\Include\Verndale\Verndale.Feature.CognitiveImageTagging.Commands.config" />
     <None Include="App_Config\Include\Verndale\Verndale.Feature.CognitiveImageTagging.Events.config" />
-    <None Include="App_Config\Include\Verndale\Verndale.Feature.CognitiveImageTagging.Pipeline.Upload.config" />
+    <None Include="App_Config\Include\Verndale\Verndale.Feature.CognitiveImageTagging.Settings.config" />
+    <None Include="App_Config\Include\Verndale\Verndale.Feature.CognitiveImageTagging.Pipeline.Upload.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
     <Compile Include="Pipelines\Upload\AddImageAltText.cs" />
   </ItemGroup>
