@@ -1,0 +1,60 @@
+﻿<?xml version="1.0"?>
+<package >
+  <metadata>
+	<id>$id$</id>
+	<version>$version$</version>
+	<title>$title$</title>
+	<authors>Sandy Foley, Richard Cabral</authors>
+	<owners>Verndale</owners>
+	<license type="expression">MIT</license>
+	<projectUrl>https://github.com/verndale/verndale-sitecore-cognitiveimagetagging</projectUrl>
+	<repository type="git" url="https://github.com/verndale/verndale-sitecore-cognitiveimagetagging.git"/>
+	<requireLicenseAcceptance>false</requireLicenseAcceptance>
+	<iconUrl>https://avatars2.githubusercontent.com/u/50928536</iconUrl>
+	<summary>Sitecore Feature library that provides the ability to generate Image Alt Text using AI via Azure Cognitive Services.</summary>
+	<description>
+THIS IS AN EXPERIMENTAL LIBRARY - DO NOT PUBLISH AI-GENERATED ALT TEXT WITHOUT HUMAN REVIEW.
+
+This library can perform the following:
+
+- Using AI, "read" the image and provide a sentence description of what it portrays.
+- Using AI, "read" the image and provide series of tags that describe what it portrays.
+- Using AI, perform OCR on the image and, if the image has embedded text, extract the text to a string value.
+
+
+REQUIRED
+You must have a subscription to Azure Cognitive Services for Computer Vision. You will need both a Subscription Key and an endpoint URL to use this library. Support for other AI
+services are not implemented, but you can see where the extension would occur.
+
+
+INSTALLATION
+Install this package using NuGet.
+
+Copy and rename /App_Config/Verndale.CognitiveImageTagging.config.example
+Remove the "example" suffix.
+Supply appropriate Azure Cognitive service connection details within the config file.
+Don't forget to review the Sitecore Feature config file in App_Config/Include/Feature for details on how to activate this library.
+
+
+In the supplied config example, you will see confidence levels for captions and embedded text. These are set to reasonable defaults, but be aware the AI can be
+quirky and unreliable. This tool should be used prime the pump on image descriptions but should not be used unsupervised.
+
+USE
+Once configured, Images will receive AI-based Alt text when they are uploaded. To add Alt text to existing images, navigate to the image in the media library.
+The Media tab within the content editor will have new buttons that allow you to retrieve ALT text from AI for the selected Media Item.
+
+ALT text will be used in the following order
+If the image contains text, the text will be written to the Image's Alt field.
+If the AI returns a high-confidence Caption, that caption will be written to the Image's Alt field.
+Any descriptive tags returned by the AI will be written to the Image's Alt field in comma-delimited fashion.
+
+Keep in mind that AI for image descriptions is relatively experimental. Your descriptive results will depend on image the image. Celebrities tend to get tagged reliably, 
+close-ups, abstract, or heavily filtered photos tend to have less reliable or extermely generic results. DO NOT TRUST AI TO SUPPLY YOU WITH ALT TEXT WITHOUT HUMAN REVIEW.
+Generated alt text may contain inaccurate descriptions or tags that could be construed as misleading or offensive. Use at your own risk! Do not publish any AI generated
+content without human review.
+	</description>
+	<releaseNotes>Fixed a typo in Verndale.Feature.CognitiveImageTagging.config.</releaseNotes>
+	<copyright>Copyright 2019</copyright>
+	<tags>Images, Alt Text, Cognitive Services, Computer Vision, AI</tags>
+  </metadata>
+</package>

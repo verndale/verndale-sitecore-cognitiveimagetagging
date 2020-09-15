@@ -11,7 +11,7 @@
     <AssemblyName>Verndale.Feature.CognitiveImageTagging</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <Deterministic>true</Deterministic>
+    <Deterministic>false</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Constellation.Foundation.Data, Version=9.1.2.20242, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\NotImpossible-ENG\packages\Constellation.Foundation.Data.9.1.2.20242\lib\net471\Constellation.Foundation.Data.dll</HintPath>
+    </Reference>
     <Reference Include="Constellation.Foundation.PackageVerification, Version=9.1.2.20552, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Constellation.Foundation.PackageVerification.9.1.2.20552\lib\net471\Constellation.Foundation.PackageVerification.dll</HintPath>
     </Reference>
@@ -38,13 +41,13 @@
       <HintPath>..\packages\Microsoft.Azure.CognitiveServices.Vision.ComputerVision.5.0.0\lib\net452\Microsoft.Azure.CognitiveServices.Vision.ComputerVision.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Rest.ClientRuntime, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Rest.ClientRuntime.2.3.18\lib\net452\Microsoft.Rest.ClientRuntime.dll</HintPath>
+      <HintPath>..\packages\Microsoft.Rest.ClientRuntime.2.3.21\lib\net461\Microsoft.Rest.ClientRuntime.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Rest.ClientRuntime.Azure, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Rest.ClientRuntime.Azure.3.3.18\lib\net452\Microsoft.Rest.ClientRuntime.Azure.dll</HintPath>
+      <HintPath>..\packages\Microsoft.Rest.ClientRuntime.Azure.3.3.19\lib\net461\Microsoft.Rest.ClientRuntime.Azure.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Sitecore.Kernel, Version=12.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Sitecore.Kernel.9.1.1\lib\net471\Sitecore.Kernel.dll</HintPath>
@@ -72,16 +75,13 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
-    <Reference Include="Verndale.CognitiveImageTagging, Version=1.0.0.20589, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Verndale.CognitiveImageTagging.1.0.0.20589\lib\net471\Verndale.CognitiveImageTagging.dll</HintPath>
+    <Reference Include="Verndale.CognitiveImageTagging, Version=3.0.1.25842, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\NotImpossible-ENG\packages\Verndale.CognitiveImageTagging.3.0.1.25842\lib\net471\Verndale.CognitiveImageTagging.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Base\ImageTagging.cs" />
     <Compile Include="Commands\AddAltTextCommand.cs" />
-    <Compile Include="Commands\BulkAddAltTextCommand.cs" />
     <Compile Include="Commands\ForceAddAltTextCommand.cs" />
-    <Compile Include="Events\AddAltTextSaveEvent.cs" />
     <Compile Include="Extensions\ItemExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -89,16 +89,18 @@
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="App.config.example" />
-    <None Include="App_Config\Include\Constellation\Constellation.Foundation.PackageVerification.config.example" />
-    <None Include="App_Config\Include\Verndale\Verndale.Feature.CognitiveImageTagging.Commands.config" />
-    <None Include="App_Config\Include\Verndale\Verndale.Feature.CognitiveImageTagging.Events.config" />
-    <None Include="App_Config\Include\Verndale\Verndale.Feature.CognitiveImageTagging.Pipeline.Upload.config" />
+    <Content Include="App_Config\Include\Feature\Verndale.Feature.CognitiveImageTagging.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <None Include="App_Config\Verndale.CognitiveImageTagging.config.example" />
+    <Content Include="App_Data\packages\Verndale-Feature-CognitiveImageTagging.zip" />
     <None Include="packages.config" />
-    <Compile Include="Pipelines\Upload\AddImageAltText.cs" />
+    <Compile Include="Pipelines\Upload\AddImageAltTextDuringUpload.cs" />
+    <Content Include="Web.config.install.xdt" />
+    <Content Include="Web.config.uninstall.xdt" />
+    <None Include="Verndale.Feature.CognitiveImageTagging.nuspec" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\packages\PutPackagesHere.txt" />
     <Content Include="Constellation.License.txt" />
     <Content Include="Verndale.License.txt" />
   </ItemGroup>
