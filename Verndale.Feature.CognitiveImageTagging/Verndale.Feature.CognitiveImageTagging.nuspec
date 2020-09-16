@@ -53,7 +53,7 @@ close-ups, abstract, or heavily filtered photos tend to have less reliable or ex
 Generated alt text may contain inaccurate descriptions or tags that could be construed as misleading or offensive. Use at your own risk! Do not publish any AI generated
 content without human review.
 	</description>
-	<releaseNotes>Fixed a typo in Verndale.Feature.CognitiveImageTagging.config.</releaseNotes>
+	<releaseNotes>Fixed yet another typo in Verndale.Feature.CognitiveImageTagging.config.</releaseNotes>
 	<copyright>Copyright 2019</copyright>
 	<tags>Images, Alt Text, Cognitive Services, Computer Vision, AI</tags>
   </metadata>
